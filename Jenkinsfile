@@ -13,7 +13,8 @@ volumes: [
 ]) {
 */
 
-node('inicio') {
+pipeline {
+    agent any
     //def myRepo = checkout scm
     //def gitCommit = myRepo.GIT_COMMIT
     //def gitBranch = myRepo.GIT_BRANCH
