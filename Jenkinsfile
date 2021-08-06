@@ -27,6 +27,7 @@ pipeline {
         stage('run') {
           steps {
               sh """
+                cd build
                 ls
                 """
           }
