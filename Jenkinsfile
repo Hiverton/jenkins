@@ -17,7 +17,7 @@ pipeline {
             steps {
               sh """
                 chmod +x gradlew
-                sudo ./gradlew build
+                ./gradlew build
                 """
             }
         }
