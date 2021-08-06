@@ -5,7 +5,7 @@ RUN chmod +x /tmp/jenkins-gradle-ci/gradlew
 WORKDIR /tmp/jenkins-gradle-ci
 RUN ls -lsah
 #RUN ./gradlew clean build
-RUN temp/gradle-6.8/bin/ clean build
+#RUN temp/gradle-6.8/bin/ clean build
 RUN mv /tmp/jenkins-gradle-ci/build/libs/*.jar /tmp/app.jar
 
 FROM adoptopenjdk:13.0.1_9-jre-openj9-0.17.0-bionic
