@@ -67,7 +67,7 @@ node('inicio') {
       }
     }
 
-//}
+}
 
   /*node('slave-02') {
     def allJob = env.JOB_NAME.tokenize('/') as String[];
