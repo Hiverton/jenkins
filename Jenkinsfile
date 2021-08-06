@@ -43,6 +43,10 @@ node('slave-01') {
 
 
     stages {
+        stage('node test')
+           steps
+               echo 'Building....'
+
         /*stage('build docker') {
             steps {
                  sh """
@@ -51,13 +55,8 @@ node('slave-01') {
                     docker push hywerthon/${projectName}:${version}
                     """
             }
-        }
-
-         stage('node test') {
-            steps {
-                 echo 'Building....'
-            }
         }*/
+
     }
 
 
