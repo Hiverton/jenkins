@@ -13,7 +13,7 @@ volumes: [
 ]) {
 */
 
-//node(label) {
+node('inicio') {
     //def myRepo = checkout scm
     //def gitCommit = myRepo.GIT_COMMIT
     //def gitBranch = myRepo.GIT_BRANCH
@@ -21,7 +21,7 @@ volumes: [
     //def allJob = env.JOB_NAME.tokenize('/') as String[];
     //def projectName = allJob[0];
 
-    def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
+    //def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
 
     stage('Test') {
       try {
