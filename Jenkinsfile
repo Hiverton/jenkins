@@ -11,19 +11,14 @@ pipeline {
                  sh 'printenv'
             }
         }
+
         stage('Test') {
 
             steps {
-
-              sh """
-                pwd
-                echo "GIT_BRANCH=${GIT_BRANCH}" >> /etc/environment
-                echo "GIT_COMMIT=${GIT_COMMIT}" >> /etc/environment
-                gradle test
-                """
-
+              sh ' gradle test'
             }
         }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
