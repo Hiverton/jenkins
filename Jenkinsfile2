@@ -1,6 +1,6 @@
-//def label = "worker-${UUID.randomUUID().toString()}"
+def label = "worker-${UUID.randomUUID().toString()}"
 
-/*podTemplate(label: label, containers: [
+podTemplate(label: label, containers: [
         containerTemplate(name: 'gradle', image: 'gradle:jre14', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true)
 
@@ -11,18 +11,18 @@ volumes: [
         hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
 
 ]) {
-*/
+
 
 pipeline {
     agent any
-    //def myRepo = checkout scm
-    //def gitCommit = myRepo.GIT_COMMIT
-    //def gitBranch = myRepo.GIT_BRANCH
-    //def shortGitCommit = "${gitCommit[0..10]}"
-    //def allJob = env.JOB_NAME.tokenize('/') as String[];
-    //def projectName = allJob[0];
+    def myRepo = checkout scm
+    def gitCommit = myRepo.GIT_COMMIT
+    def gitBranch = myRepo.GIT_BRANCH
+    def shortGitCommit = "${gitCommit[0..10]}"
+    def allJob = env.JOB_NAME.tokenize('/') as String[];
+    def projectName = allJob[0];
 
-    //def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
+    def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
 
     stage('Test') {
       try {
@@ -47,11 +47,11 @@ pipeline {
       }
     }
 
-    /*stage('Sonar') {
+    stage('Sonar') {
       container('gradle') {
         sh "gradle sonarqube -Dsonar.qualitygate.wait=true -Dsonar.analysis.mode=publish"
       }
-    }*/
+    }
 
     stage('Create Docker images') {
       container('docker') {
@@ -70,27 +70,27 @@ pipeline {
 
 }
 
-  /*node('slave-02') {
+  node('slave-02') {
     def allJob = env.JOB_NAME.tokenize('/') as String[];
     def projectName = allJob[0];
     checkout scm
     def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
     
         stage('Clair') {
-      withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                        credentialsId: 'coffeeandit',
-                        usernameVariable: 'DOCKER_HUB_USER',
-                        passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
-        sh """
-           CLAIR_ADDR=35.238.120.251 CLAIR_OUTPUT=High CLAIR_THRESHOLD=0 DOCKER_USER=${DOCKER_HUB_USER} DOCKER_PASSWORD=${DOCKER_HUB_PASSWORD} FORMAT_OUTPUT=table klar coffeeandit/${projectName}:${version}
-           clairctl --config=/tmp/clairctl.yml report coffeeandit/${projectName}:${version}
-           mv ./reports/html/*.html index.html
-           """
+          withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                            credentialsId: 'coffeeandit',
+                            usernameVariable: 'DOCKER_HUB_USER',
+                            passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
+            sh """
+               CLAIR_ADDR=35.238.120.251 CLAIR_OUTPUT=High CLAIR_THRESHOLD=0 DOCKER_USER=${DOCKER_HUB_USER} DOCKER_PASSWORD=${DOCKER_HUB_PASSWORD} FORMAT_OUTPUT=table klar coffeeandit/${projectName}:${version}
+               clairctl --config=/tmp/clairctl.yml report coffeeandit/${projectName}:${version}
+               mv ./reports/html/*.html index.html
+               """
 
-        archive (includes: 'index.html')
+            archive (includes: 'index.html')
 
 
-      }
+          }
     }
     
     stage('Deploy') {
@@ -98,4 +98,4 @@ pipeline {
       sh 'kubectl apply -f deploy.yml -n istio-system'
 
     }
-  }*/
+  }
