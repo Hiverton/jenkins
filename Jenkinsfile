@@ -4,13 +4,15 @@ def label = "worker-${UUID.randomUUID().toString()}"
         containerTemplate(name: 'gradle', image: 'gradle:jre14', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true)
 
-],*/
+],
 
 volumes: [
         hostPathVolume(mountPath: '/home/gradle/.gradle', hostPath: '/tmp/jenkins/.gradle'),
         hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
 
 ]) {
+*/
+
   node(label) {
     def myRepo = checkout scm
     def gitCommit = myRepo.GIT_COMMIT
@@ -95,5 +97,3 @@ volumes: [
 
     }
   }*/
-
-}
