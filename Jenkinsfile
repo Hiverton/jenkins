@@ -1,10 +1,10 @@
 def label = "worker-${UUID.randomUUID().toString()}"
 
-podTemplate(label: label, containers: [
+/*podTemplate(label: label, containers: [
         containerTemplate(name: 'gradle', image: 'gradle:jre14', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true)
 
-],
+],*/
 
 volumes: [
         hostPathVolume(mountPath: '/home/gradle/.gradle', hostPath: '/tmp/jenkins/.gradle'),
