@@ -17,16 +17,6 @@ pipeline {
             }
         }
 
-        stage('run') {
-
-          steps {
-              sh """
-                cd build
-                ls
-                """
-          }
-        }
-
     }
 
 }
@@ -41,12 +31,11 @@ node('slave-01') {
     def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
 
     stage('build docker') {
-        container('gradle') {
-            sh """
-                sudo docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
-                sudo docker build . -t hywerthon/${projectName}:${version}
-                sudo docker push hywerthon/${projectName}:${version}
-               """
-         }
+
+        sh """
+            sudo docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
+            hywerthon/${projectName}:${version}
+            sudo docker push hywerthon/${projectName}:${version}
+           """
     }
 }
