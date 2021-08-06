@@ -8,14 +8,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                 sh 'printenv'
+                 echo 'Building....'
             }
         }
 
         stage('Test') {
 
             steps {
-              sh ' gradle test'
+              sh ' gradlew test'
             }
         }
 
