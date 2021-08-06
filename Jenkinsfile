@@ -1,9 +1,9 @@
+def myRepo = checkout scm
+def gitCommit = myRepo.GIT_COMMIT
+def gitBranch = myRepo.GIT_BRANCH
+
 pipeline {
     agent any
-
-    def myRepo = checkout scm
-    def gitCommit = myRepo.GIT_COMMIT
-    def gitBranch = myRepo.GIT_BRANCH
 
     stages {
         stage('Build') {
