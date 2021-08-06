@@ -6,17 +6,17 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
                  echo 'Building....'
             }
         }
 
-        stage('Test') {
+        stage('Build') {
 
             steps {
               sh """
-                gradle build
+                /tmp/gradle-6.8/bin/gradle build
                 """
             }
         }
