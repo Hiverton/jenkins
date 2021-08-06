@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        agent('gradle')
+    }
 
     environment {
         def myRepo = checkout scm
