@@ -14,12 +14,12 @@ volumes: [
 */
 
   node(label) {
-    def myRepo = checkout scm
-    def gitCommit = myRepo.GIT_COMMIT
-    def gitBranch = myRepo.GIT_BRANCH
-    def shortGitCommit = "${gitCommit[0..10]}"
-    def allJob = env.JOB_NAME.tokenize('/') as String[];
-    def projectName = allJob[0];
+    //def myRepo = checkout scm
+    //def gitCommit = myRepo.GIT_COMMIT
+    //def gitBranch = myRepo.GIT_BRANCH
+    //def shortGitCommit = "${gitCommit[0..10]}"
+    //def allJob = env.JOB_NAME.tokenize('/') as String[];
+    //def projectName = allJob[0];
     def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
 
     stage('Test') {
