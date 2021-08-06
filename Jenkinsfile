@@ -27,7 +27,7 @@ pipeline {
         stage('run') {
           steps {
               sh """
-                mv ${projectName}:${version} ./root
+                ls
                 """
           }
         }
