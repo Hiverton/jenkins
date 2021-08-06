@@ -3,10 +3,12 @@ RUN mkdir /tmp/jenkins-gradle-ci
 ADD . /tmp/jenkins-gradle-ci
 RUN chmod +x /tmp/jenkins-gradle-ci/gradlew
 WORKDIR /tmp/jenkins-gradle-ci
+
 RUN ls -lsah
+
 RUN ./gradlew clean build
 
-#RUN ../hiverton.alves/temp/gradle-6.8/bin/gradle build
+RUN ls -lsah
 
 RUN mv /tmp/jenkins-gradle-ci/build/libs/*.jar /tmp/app.jar
 
