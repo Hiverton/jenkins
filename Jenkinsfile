@@ -1,6 +1,8 @@
 pipeline {
     agent {
-        agent('gradle')
+       withGradle {
+           sh './gradlew build'
+       }
     }
 
     environment {
