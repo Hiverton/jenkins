@@ -1,10 +1,4 @@
 pipeline {
-    script {
-        def myRepo = checkout scm
-        def gitCommit = myRepo.GIT_COMMIT
-        def gitBranch = myRepo.GIT_BRANCH
-    }
-
     agent any
 
     stages {
@@ -14,6 +8,10 @@ pipeline {
             }
         }
         stage('Test') {
+            def myRepo = checkout scm
+            def gitCommit = myRepo.GIT_COMMIT
+            def gitBranch = myRepo.GIT_BRANCH
+
             steps {
 
               sh """
