@@ -25,15 +25,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-
-            steps {
-              sh """
-                /tmp/gradle-6.8/bin/gradle build
-                """
-            }
-        }
-
         stage('run') {
           steps {
               sh """
