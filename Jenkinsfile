@@ -8,7 +8,7 @@ pipeline {
             }
         }
         stage('Test') {
-            try {
+            steps {
                 container('gradle') {
                   sh """
                     pwd
@@ -17,11 +17,7 @@ pipeline {
                     gradle test
                     """
                 }
-              }
-              catch (exc) {
-                println "Failed to test - ${currentBuild.fullDisplayName}"
-                throw(exc)
-              }
+            }
         }
         stage('Deploy') {
             steps {
