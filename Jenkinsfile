@@ -28,6 +28,7 @@ pipeline {
           steps {
               sh """
                 cd build
+                cd tmp
                 ls
                 """
           }
