@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        myRepo = checkout scm
-        gitCommit = myRepo.GIT_COMMIT
-        gitBranch = myRepo.GIT_BRANCH
+        def myRepo = checkout scm
+        def gitCommit = myRepo.GIT_COMMIT
+        def gitBranch = myRepo.GIT_BRANCH
     }
 
     stages {
