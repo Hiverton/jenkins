@@ -42,10 +42,10 @@ node('slave-01') {
     }
 
 
-    stages {
-        stage('node test')
-           steps
-               echo 'Building....'
+    step
+        echo 'Building....'
+
+
 
         /*stage('build docker') {
             steps {
@@ -57,7 +57,7 @@ node('slave-01') {
             }
         }*/
 
-    }
+
 
 
 }
