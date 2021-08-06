@@ -36,27 +36,29 @@ volumes: [
         throw(exc)
       }
     }
+
     stage('Build') {
       container('gradle') {
         sh "gradle build"
       }
     }
-    stage('Sonar') {
+
+    /*stage('Sonar') {
       container('gradle') {
         sh "gradle sonarqube -Dsonar.qualitygate.wait=true -Dsonar.analysis.mode=publish"
       }
-    }
+    }*/
 
     stage('Create Docker images') {
       container('docker') {
         withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                          credentialsId: 'coffeeandit',
+                          credentialsId: 'hywerthon',
                           usernameVariable: 'DOCKER_HUB_USER',
                           passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
           sh """
             docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
-            docker build . -t coffeeandit/${projectName}:${version}
-            docker push coffeeandit/${projectName}:${version}
+            docker build . -t hywerthon/${projectName}:${version}
+            docker push hywerthon/${projectName}:${version}
             """
         }
       }
