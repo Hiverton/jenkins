@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-       withGradle {
-           sh './gradlew build'
-       }
-    }
+    agent any
 
     environment {
         def myRepo = checkout scm
