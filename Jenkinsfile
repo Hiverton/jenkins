@@ -15,7 +15,10 @@ pipeline {
         stage('Test') {
 
             steps {
-              sh 'sudo ./gradlew build'
+              sh """
+                chmod +x gradlew
+                sudo ./gradlew build
+                """
             }
         }
 
