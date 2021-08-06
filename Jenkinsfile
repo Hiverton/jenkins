@@ -1,4 +1,4 @@
-def label = "worker-${UUID.randomUUID().toString()}"
+//def label = "worker-${UUID.randomUUID().toString()}"
 
 /*podTemplate(label: label, containers: [
         containerTemplate(name: 'gradle', image: 'gradle:jre14', command: 'cat', ttyEnabled: true),
@@ -13,13 +13,14 @@ volumes: [
 ]) {
 */
 
-  node(label) {
+//node(label) {
     //def myRepo = checkout scm
     //def gitCommit = myRepo.GIT_COMMIT
     //def gitBranch = myRepo.GIT_BRANCH
     //def shortGitCommit = "${gitCommit[0..10]}"
     //def allJob = env.JOB_NAME.tokenize('/') as String[];
     //def projectName = allJob[0];
+
     def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
 
     stage('Test') {
@@ -45,11 +46,11 @@ volumes: [
       }
     }
 
-    /*stage('Sonar') {
-      container('gradle') {
-        sh "gradle sonarqube -Dsonar.qualitygate.wait=true -Dsonar.analysis.mode=publish"
-      }
-    }*/
+/*stage('Sonar') {
+  container('gradle') {
+    sh "gradle sonarqube -Dsonar.qualitygate.wait=true -Dsonar.analysis.mode=publish"
+  }
+}*/
 
     stage('Create Docker images') {
       container('docker') {
@@ -66,7 +67,7 @@ volumes: [
       }
     }
 
-  }
+//}
 
   /*node('slave-02') {
     def allJob = env.JOB_NAME.tokenize('/') as String[];
