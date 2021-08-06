@@ -3,8 +3,6 @@ pipeline {
 
     environment {
         def myRepo = checkout scm
-        def gitCommit = GIT_BRANCH
-        def gitBranch = GIT_BRANCH
     }
 
     stages {
@@ -19,8 +17,8 @@ pipeline {
 
               sh """
                 pwd
-                echo "GIT_BRANCH=${gitBranch}" >> /etc/environment
-                echo "GIT_COMMIT=${gitCommit}" >> /etc/environment
+                echo "GIT_BRANCH=${GIT_BRANCH}" >> /etc/environment
+                echo "GIT_COMMIT=${GIT_COMMIT}" >> /etc/environment
                 gradle test
                 """
 
