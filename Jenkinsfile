@@ -29,34 +29,36 @@ pipeline {
 
     }
 
-    node('slave-01') {
+}
 
-        environment {
-            def myRepo = checkout scm
-            def DOCKER_HUB_USER = 'hywerthon'
-            def DOCKER_HUB_PASSWORD = 'n1c0l@s2013'
-            def projectName = 'gradle-cli';
-            def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
-        }
+node('slave-01') {
 
-        stages {
-            /*stage('build docker') {
-                steps {
-                     sh """
-                        docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
-                        docker build . -t hywerthon/${projectName}:${version}
-                        docker push hywerthon/${projectName}:${version}
-                        """
-                }
-            }*/
+    environment {
+        def myRepo = checkout scm
+        def DOCKER_HUB_USER = 'hywerthon'
+        def DOCKER_HUB_PASSWORD = 'n1c0l@s2013'
+        def projectName = 'gradle-cli';
+        def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
+    }
 
-             stage('node test') {
-                steps {
-                     echo 'Building....'
-                }
+    /*
+    stages {
+        /*stage('build docker') {
+            steps {
+                 sh """
+                    docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
+                    docker build . -t hywerthon/${projectName}:${version}
+                    docker push hywerthon/${projectName}:${version}
+                    """
             }
         }
 
+         stage('node test') {
+            steps {
+                 echo 'Building....'
+            }
+        }
     }
+    */
 
 }
