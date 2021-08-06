@@ -34,7 +34,7 @@ node('slave-01') {
 
         sh """
             sudo docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
-            hywerthon/${projectName}:${version}
+            sudo docker build . -t hywerthon/${projectName}:${version}
             sudo docker push hywerthon/${projectName}:${version}
            """
     }
