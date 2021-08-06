@@ -31,7 +31,6 @@ pipeline {
 }
 
 node('slave-01') {
-    agent any
 
     environment {
         def myRepo = checkout scm
