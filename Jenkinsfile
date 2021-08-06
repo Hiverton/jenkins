@@ -25,12 +25,19 @@ pipeline {
             }
         }
 
-        stage('Create Docker images') {
+        stage('Build') {
+
+            steps {
+              sh """
+                /tmp/gradle-6.8/bin/gradle build
+                """
+            }
+        }
+
+        stage('run') {
           steps {
               sh """
-                docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
-                docker build . -t hywerthon/${projectName}:${version}
-                docker push hywerthon/${projectName}:${version}
+                mv ${projectName}:${version} ./pacotes
                 """
           }
         }
