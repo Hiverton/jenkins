@@ -41,7 +41,6 @@ node('slave-01') {
 
     stage('build docker') {
         sh """
-            docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
             docker build . -t hywerthon/${projectName}:${version}
             docker push hywerthon/${projectName}:${version}
            """
