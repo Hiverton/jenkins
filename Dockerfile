@@ -20,6 +20,9 @@
 
 
 FROM openjdk:14-jdk-alpine3.10
+RUN mkdir /tmp/jenkins-gradle-ci
+ADD . /tmp/jenkins-gradle-ci
+RUN chmod +x /tmp/jenkins-gradle-ci/gradlew
 RUN ./gradlew clean build
 ADD build/libs/gradle-ci-0.0.1-SNAPSHOT.jar /app/app.jar
 WORKDIR /app
