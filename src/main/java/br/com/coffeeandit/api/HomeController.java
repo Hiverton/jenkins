@@ -19,7 +19,7 @@ public class HomeController {
     @GetMapping(path = "/", produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> home() {
 
-        return ResponseEntity.ok("Alterado!");
+        return ResponseEntity.ok("Hiverton!");
 
     }
 
