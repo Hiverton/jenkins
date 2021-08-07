@@ -2,19 +2,18 @@ FROM openjdk:13
 
 RUN ls -lsah
 
+RUN ./gradlew clean build
+
+RUN ls -lsah build/libs/
+
+RUN ls -lsah
+
 RUN mkdir /tmp/jenkins-gradle-ci
 
 ADD . /tmp/jenkins-gradle-ci
 RUN chmod +x /tmp/jenkins-gradle-ci/gradlew
 WORKDIR /tmp/jenkins-gradle-ci
 
-RUN ls -lsah
-
-RUN ./gradlew clean build
-
-RUN ls -lsah build/libs/
-
-RUN mkdir /tmp/jenkins-gradle-ci
 
 RUN mv build/libs/*.jar /tmp/app.jar
 
