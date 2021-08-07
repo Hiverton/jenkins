@@ -7,8 +7,7 @@ pipeline {
 
             steps {
               sh """
-                ls
-                /tmp/gradle-6.8/bin/gradle test
+                ./gradlew test
                 """
             }
         }
