@@ -14,6 +14,8 @@ RUN ./gradlew clean build
 
 RUN ls -lsah build/libs/
 
+RUN mkdir /tmp/jenkins-gradle-ci
+
 RUN mv build/libs/*.jar /tmp/app.jar
 
 FROM adoptopenjdk:13.0.1_9-jre-openj9-0.17.0-bionic
