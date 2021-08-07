@@ -16,7 +16,15 @@ RUN ./gradlew clean build
 
 RUN ls -lsah
 
-RUN mv /build/libs/*.jar /tmp/app.jar
+RUN cd build
+
+RUN cd libs
+
+RUN ls -lsah
+
+RUN mv gradle-ci-0.0.1-SNAPSHOT.jar /tmp/app.jar
+
+#RUN mv build/libs/*.jar /tmp/app.jar
 
 FROM adoptopenjdk:13.0.1_9-jre-openj9-0.17.0-bionic
 COPY --from=0 /tmp/app.jar /tmp
