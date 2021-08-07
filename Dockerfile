@@ -1,7 +1,5 @@
 FROM openjdk:13
 
-RUN chmod 777 /tmp
-
 RUN ls -lsah
 
 RUN mkdir /tmp/jenkins-gradle-ci
@@ -14,15 +12,10 @@ RUN ls -lsah
 
 RUN ./gradlew clean build
 
-RUN ls -lsah
+#RUN ls -lsah
 
-RUN cd build
-
-RUN ls -lsah
-
-RUN cd libs
-
-RUN ls -lsah
+RUN ls -lsah build/libs/
+RUN ls -lsah tmp/jenkins-gradle-ci
 
 RUN mv gradle-ci-0.0.1-SNAPSHOT.jar /tmp/app.jar
 
