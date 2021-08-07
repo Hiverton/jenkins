@@ -1,5 +1,10 @@
 FROM openjdk:13
+
+RUN mkdir /tmp
+RUN ls -lsah
+
 RUN mkdir /tmp/jenkins-gradle-ci
+
 ADD . /tmp/jenkins-gradle-ci
 RUN chmod +x /tmp/jenkins-gradle-ci/gradlew
 WORKDIR /tmp/jenkins-gradle-ci
