@@ -17,7 +17,7 @@ RUN ./gradlew clean build
 RUN ls -lsah build/libs/
 RUN ls -lsah tmp/jenkins-gradle-ci
 
-RUN mv gradle-ci-0.0.1-SNAPSHOT.jar /tmp/app.jar
+RUN mv build/libs/*.jar /tmp/app.jar
 
 #RUN mv build/libs/*.jar /tmp/app.jar
 
