@@ -31,6 +31,8 @@ WORKDIR /tmp/jenkins-gradle-ci
 
 RUN ./gradlew clean build
 
+RUN ls -lsah
+
 ADD build/libs/gradle-ci-0.0.1-SNAPSHOT.jar /app/app.jar
 
 WORKDIR /app
