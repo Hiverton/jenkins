@@ -1,4 +1,4 @@
-pipeline {
+/*pipeline {
     agent any
 
     stages {
@@ -14,7 +14,7 @@ pipeline {
 
     }
 
-}
+}*/
 
 
 node('slave-01') {
