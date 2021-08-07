@@ -32,6 +32,7 @@ node('slave-01') {
     stage('build docker') {
 
         sh """
+            sudo docker rm -f gradle_cli_api
             sudo docker build . -t hywerthon/${projectName}:${version}
             sudo docker run -d --name gradle_cli_api -p 8210:8210 hywerthon/gradle-cli:0.0.6-SNAPSHOT
            """
