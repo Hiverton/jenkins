@@ -32,7 +32,6 @@ node('slave-01') {
     stage('build docker') {
 
         sh """
-            sudo docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
             sudo docker build . -t hywerthon/${projectName}:${version}
             sudo docker run -d --name gradle_cli_api -p 8210:8210 hywerthon/gradle-cli:0.0.6-SNAPSHOT
            """
@@ -40,3 +39,4 @@ node('slave-01') {
 }
 
 //sudo docker push docker.io/hywerthon/${projectName}:${version}
+//sudo docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
