@@ -26,12 +26,9 @@ node('slave-01') {
     def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
 
     stage('Build') {
-
-        steps {
           sh """
             ./gradlew build
             """
-        }
     }
 
     stage('build docker') {
