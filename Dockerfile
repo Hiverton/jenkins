@@ -16,7 +16,7 @@ RUN ls -lsah build/libs/
 
 RUN ls -lsah
 
-COPY build/libs/*.jar /temp/app.jar
+COPY --from=build /build/libs/*.jar /temp
 
 FROM adoptopenjdk:13.0.1_9-jre-openj9-0.17.0-bionic
 COPY --from=0 /temp/app.jar /tmp
