@@ -16,13 +16,13 @@ RUN ls -lsah build/libs/
 
 RUN ls -lsah
 
-#COPY --from=0 /build/libs/*.jar /temp/app.jar
+COPY --from=0 /build/libs/*.jar /temp/app.jar
 
-#FROM adoptopenjdk:13.0.1_9-jre-openj9-0.17.0-bionic
+FROM adoptopenjdk:13.0.1_9-jre-openj9-0.17.0-bionic
 
-#COPY --from=0 /temp/app.jar /tmp
+COPY --from=0 /temp/app.jar /tmp
 
-#RUN ls /tmp
+RUN ls /tmp
 
 ENTRYPOINT ["java", "-jar", "/build/gradle-ci-0.0.1-SNAPSHOT.jar"]
 EXPOSE 8210
