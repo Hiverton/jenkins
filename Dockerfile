@@ -21,21 +21,22 @@
 
 FROM openjdk:14-jdk-alpine3.10
 
-RUN mkdir /tmp/jenkins-gradle-ci
+#RUN mkdir /tmp/jenkins-gradle-ci
 
-ADD . /tmp/jenkins-gradle-ci
+#ADD . /tmp/jenkins-gradle-ci
 
-RUN chmod +x /tmp/jenkins-gradle-ci/gradlew
+#RUN chmod +x /tmp/jenkins-gradle-ci/gradlew
 
-WORKDIR /tmp/jenkins-gradle-ci
+#WORKDIR /tmp/jenkins-gradle-ci
 
-RUN ./gradlew clean build
+#RUN ./gradlew clean build
 
 RUN ls -lsah
 
 ADD build/libs/gradle-ci-0.0.1-SNAPSHOT.jar /app/app.jar
 
 WORKDIR /app
+
 EXPOSE 8210
 CMD java -jar app.jar
 
