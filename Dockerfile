@@ -1,6 +1,5 @@
 FROM openjdk:13
-RUN rm -f /tmp
-RUN mkdir /tmp
+
 RUN chmod 777 /tmp
 
 RUN ls -lsah
