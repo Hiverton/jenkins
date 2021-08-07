@@ -41,10 +41,28 @@ node('slave-01') {
 
     }
 
-    stage('build docker') {
+    stage('build docker image') {
 
         sh """
             sudo docker build . -t hywerthon/${projectName}:${version}
+           """
+    }
+
+    stage('remove container docker') {
+
+        try {
+            sh """
+                sudo docker push docker.io/hywerthon/${projectName}:${version}
+               """
+        } catch (exc) {
+          println "Erro ao subir image para registry..."
+        }
+
+    }
+
+    stage('run image') {
+
+        sh """
             sudo docker run -d --name gradle_cli_api -p 8210:8210 hywerthon/gradle-cli:0.0.6-SNAPSHOT
            """
     }
