@@ -10,7 +10,7 @@ WORKDIR /tmp/jenkins-gradle-ci
 
 RUN ls -lsah
 
-RUN ./gradlew clean build
+#RUN ./gradlew clean build
 
 RUN ls -lsah build/libs/
 
