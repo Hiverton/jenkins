@@ -18,6 +18,8 @@ RUN ls -lsah
 
 RUN cd build
 
+RUN ls -lsah
+
 RUN cd libs
 
 RUN ls -lsah
