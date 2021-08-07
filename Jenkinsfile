@@ -7,7 +7,7 @@ pipeline {
 
             steps {
               sh """
-                ./gradlew test
+                ./gradlew build
                 """
             }
         }
