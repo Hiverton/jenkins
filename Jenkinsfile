@@ -16,7 +16,7 @@
 
 }*/
 
-
+/*
 node('slave-01') {
 
     def myRepo = checkout scm
@@ -67,10 +67,10 @@ node('slave-01') {
            """
     }
 }
-
+*/
 //máquina 2
 
-node('slave-02') {
+node('slave-01') {
 
     def myRepo = checkout scm
     def projectName = 'gradle-cli';
