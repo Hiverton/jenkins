@@ -77,7 +77,7 @@ node('slave-01') {
 
         try {
             sh """
-                sudo docker push docker.io/hywerthon/gradle-cli
+                sudo docker push docker.io/hywerthon/gradle-cli:v2
                """
         } catch (exc) {
           println "Erro ao subir image para registry..."
@@ -99,7 +99,7 @@ node('slave-01') {
     stage('pull image') {
         try {
             sh """
-                sudo docker pull docker.io/hywerthon/gradle-cli:latest
+                sudo docker pull docker.io/hywerthon/gradle-cli:v2
                """
         } catch (exc) {
           println "Erro ao puxar image para registry..."
@@ -110,7 +110,7 @@ node('slave-01') {
     stage('run image') {
         try {
             sh """
-                sudo docker run -d --name gradle_cli_api -p 8210:8210 docker.io/hywerthon/gradle-cli:latest
+                sudo docker run -d --name gradle_cli_api -p 8210:8210 docker.io/hywerthon/gradle-cli:v2
                """
         } catch (exc) {
           println "Erro ao subir image para registry..."
