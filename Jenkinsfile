@@ -59,25 +59,23 @@ node('slave-01') {
 
     }
 
-    /*
+    //sudo docker tag hywerthon/${projectName}:${version} docker.io/hywerthon/gradle-cli
     stage('tag an image') {
 
         try {
             sh """
-                sudo docker tag hywerthon/${projectName}:${version} docker.io/hywerthon/gradle-cli
+                sudo docker tag hywerthon/gradle-cli:0.0.6-SNAPSHOT docker.io/hywerthon/gradle-cli
                """
         } catch (exc) {
           println "erro ao tag image"
         }
-
     }
-    */
 
     stage('push image docker') {
 
         try {
             sh """
-                sudo docker push docker.io/hywerthon/gradle-cli:v2
+                sudo docker push docker.io/hywerthon/gradle-cli
                """
         } catch (exc) {
           println "Erro ao subir image para registry..."
@@ -99,18 +97,17 @@ node('slave-01') {
     stage('pull image') {
         try {
             sh """
-                sudo docker pull docker.io/hywerthon/gradle-cli:v2
+                sudo docker pull docker.io/hywerthon/gradle-cli
                """
         } catch (exc) {
           println "Erro ao puxar image para registry..."
         }
-
     }
 
     stage('run image') {
         try {
             sh """
-                sudo docker run -d --name gradle_cli_api -p 8210:8210 docker.io/hywerthon/gradle-cli:v2
+                sudo docker run -d --name gradle_cli_api -p 8210:8210 docker.io/hywerthon/gradle-cli
                """
         } catch (exc) {
           println "Erro ao subir image para registry..."
@@ -119,7 +116,6 @@ node('slave-01') {
               sudo docker run -d --name gradle_cli_api -p 8210:8210 hywerthon/gradle-cli:0.0.6-SNAPSHOT
              """
         }
-
     }
 }
 
