@@ -43,7 +43,7 @@ node('slave-01') {
     stage('build docker image') {
 
         sh """
-            sudo docker build . -t hywerthon/${projectName}:${version}
+            sudo docker build . -t hywerthon/gradle-cli
            """
     }
 
@@ -64,7 +64,7 @@ node('slave-01') {
 
         try {
             sh """
-                sudo docker tag hywerthon/gradle-cli:0.0.9-SNAPSHOT docker.io/hywerthon/gradle-cli:${version}
+                sudo docker tag hywerthon/gradle-cli docker.io/hywerthon/gradle-cli:${version}
                """
         } catch (exc) {
           println "erro ao tag image"
@@ -113,7 +113,7 @@ node('slave-01') {
           println "Erro ao subir image para registry..."
           println "subindo image local..."
           sh """
-              sudo docker run -d --name gradle_cli_api -p 8210:8210 hywerthon/${projectName}:${version}
+              sudo docker run -d --name gradle_cli_api -p 8210:8210 hywerthon/gradle-cli
              """
         }
     }
