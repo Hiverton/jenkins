@@ -51,7 +51,7 @@ node('slave-01') {
 
         try {
             sh """
-                sudo docker login -u hywerthon -p n1c0l@s2013 docker.io
+                sudo docker login -u senha -p password docker.io
                """
         } catch (exc) {
           println "erro ao se logar"
