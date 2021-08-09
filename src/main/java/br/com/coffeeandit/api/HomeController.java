@@ -19,7 +19,7 @@ public class HomeController {
     @GetMapping(path = "/", produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> home() {
 
-        return ResponseEntity.ok("Hiverton Alves Rodrigues!");
+        return ResponseEntity.ok("push image docker hub!");
 
     }
 
