@@ -119,6 +119,38 @@ node('slave-01') {
 }
 
 
+node('slave-02') {
+
+    def myRepo = checkout scm
+    def projectName = 'gradle-cli';
+    def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
+
+    stage('remove container docker') {
+
+        try {
+            sh """
+                sudo docker rm -f gradle_cli_api
+               """
+        } catch (exc) {
+          println "Não tem container rodando..."
+        }
+
+    }
+
+    stage('run image') {
+        try {
+            sh """
+                sudo docker run -d --name gradle_cli_api -p 8210:8210 docker.io/hywerthon/gradle-cli:${version}
+               """
+        } catch (exc) {
+          println "Erro ao subir image para registry..."
+          println "subindo image local..."
+        }
+    }
+}
+
+
+
 
 //sudo docker push docker.io/hywerthon/${projectName}:${version}
 //sudo docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
