@@ -60,7 +60,7 @@ node('slave-01') {
 
     }
 
-    stage('remove container docker') {
+    stage('push image docker') {
 
         try {
             sh """
@@ -72,10 +72,32 @@ node('slave-01') {
 
     }
 
+     stage('remove an image local') {
+         try {
+             sh """
+                 sudo docker rmi hywerthon/gradle-cli
+                """
+         } catch (exc) {
+           println "Erro ao remover uma image"
+         }
+
+    }
+
+    stage('pull image') {
+        try {
+            sh """
+                sudo docker pull hywerthon/gradle-cli:latest
+               """
+        } catch (exc) {
+          println "Erro ao puxar image para registry..."
+        }
+
+    }
+
     stage('run image') {
         try {
             sh """
-                sudo docker pull -d --name gradle_cli_api -p 8210:8210 hywerthon/gradle-cli:latest
+                sudo docker run -d --name gradle_cli_api -p 8210:8210 hywerthon/gradle-cli:latest
                """
         } catch (exc) {
           println "Erro ao subir image para registry..."
