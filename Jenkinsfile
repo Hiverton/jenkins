@@ -64,7 +64,7 @@ node('slave-01') {
 
         try {
             sh """
-                sudo docker tag hywerthon/${projectName}:${version} docker.io/hywerthon/gradle-cli:${version}
+                sudo docker tag hywerthon/gradle-cli:0.0.6-SNAPSHOT docker.io/hywerthon/gradle-cli:${version}
                """
         } catch (exc) {
           println "erro ao tag image"
