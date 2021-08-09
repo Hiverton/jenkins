@@ -121,6 +121,7 @@ node('slave-01') {
 
 node('slave-02') {
 
+    def myRepo = checkout scm
     def projectName = 'gradle-cli';
     def version = sh(script: "(cat gradle.properties | grep version | cut -d'=' -f2)", returnStdout: true)
 
