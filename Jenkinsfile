@@ -1,21 +1,3 @@
-/*pipeline {
-    agent any
-
-    stages {
-
-        stage('Test') {
-
-            steps {
-              sh """
-                ./gradlew build
-                """
-            }
-        }
-
-    }
-
-}*/
-
 node('slave-01') {
 
     def myRepo = checkout scm
@@ -39,7 +21,7 @@ node('slave-01') {
 
         try {
             sh """
-                sudo docker login -u hywerthon -p n1c0l@s2013 docker.io
+                sudo docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD} docker.io
                """
         } catch (exc) {
           println "erro ao se logar"
@@ -148,9 +130,3 @@ node('slave-02') {
         }
     }
 }
-
-
-
-
-//sudo docker push docker.io/hywerthon/${projectName}:${version}
-//sudo docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
