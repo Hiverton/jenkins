@@ -47,11 +47,23 @@ node('slave-01') {
            """
     }
 
-    stage('tag an image') {
+    stage('login') {
 
         try {
             sh """
                 sudo docker login -u hywerthon -p n1c0l@s2013 docker.io
+               """
+        } catch (exc) {
+          println "erro ao se logar"
+        }
+
+    }
+
+    /*
+    stage('tag an image') {
+
+        try {
+            sh """
                 sudo docker tag hywerthon/${projectName}:${version} docker.io/hywerthon/gradle-cli
                """
         } catch (exc) {
@@ -59,6 +71,7 @@ node('slave-01') {
         }
 
     }
+    */
 
     stage('push image docker') {
 
@@ -75,7 +88,7 @@ node('slave-01') {
      stage('remove an image local') {
          try {
              sh """
-                 sudo docker rmi hywerthon/gradle-cli
+                 sudo docker rmi docker.io/hywerthon/gradle-cli
                 """
          } catch (exc) {
            println "Erro ao remover uma image"
@@ -86,7 +99,7 @@ node('slave-01') {
     stage('pull image') {
         try {
             sh """
-                sudo docker pull hywerthon/gradle-cli:latest
+                sudo docker pull docker.io/hywerthon/gradle-cli:latest
                """
         } catch (exc) {
           println "Erro ao puxar image para registry..."
@@ -97,7 +110,7 @@ node('slave-01') {
     stage('run image') {
         try {
             sh """
-                sudo docker run -d --name gradle_cli_api -p 8210:8210 hywerthon/gradle-cli:latest
+                sudo docker run -d --name gradle_cli_api -p 8210:8210 docker.io/hywerthon/gradle-cli:latest
                """
         } catch (exc) {
           println "Erro ao subir image para registry..."
