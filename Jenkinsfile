@@ -51,7 +51,7 @@ node('slave-01') {
 
         try {
             sh """
-                sudo docker login -u senha -p password docker.io
+                sudo docker login -u hywerthon -p n1c0l@s2013 docker.io
                """
         } catch (exc) {
           println "erro ao se logar"
@@ -64,7 +64,7 @@ node('slave-01') {
 
         try {
             sh """
-                sudo docker tag hywerthon/gradle-cli:0.0.6-SNAPSHOT docker.io/hywerthon/gradle-cli
+                sudo docker tag hywerthon/${projectName}:${version} docker.io/hywerthon/gradle-cli:${version}
                """
         } catch (exc) {
           println "erro ao tag image"
@@ -75,7 +75,7 @@ node('slave-01') {
 
         try {
             sh """
-                sudo docker push docker.io/hywerthon/gradle-cli
+                sudo docker push docker.io/hywerthon/gradle-cli:${version}
                """
         } catch (exc) {
           println "Erro ao subir image para registry..."
@@ -86,7 +86,7 @@ node('slave-01') {
      stage('remove an image local') {
          try {
              sh """
-                 sudo docker rmi docker.io/hywerthon/gradle-cli
+                 sudo docker rmi docker.io/hywerthon/gradle-cli:${version}
                 """
          } catch (exc) {
            println "Erro ao remover uma image"
@@ -97,7 +97,7 @@ node('slave-01') {
     stage('pull image') {
         try {
             sh """
-                sudo docker pull docker.io/hywerthon/gradle-cli
+                sudo docker pull docker.io/hywerthon/gradle-cli:${version}
                """
         } catch (exc) {
           println "Erro ao puxar image para registry..."
@@ -107,13 +107,13 @@ node('slave-01') {
     stage('run image') {
         try {
             sh """
-                sudo docker run -d --name gradle_cli_api -p 8210:8210 docker.io/hywerthon/gradle-cli
+                sudo docker run -d --name gradle_cli_api -p 8210:8210 docker.io/hywerthon/gradle-cli:${version}
                """
         } catch (exc) {
           println "Erro ao subir image para registry..."
           println "subindo image local..."
           sh """
-              sudo docker run -d --name gradle_cli_api -p 8210:8210 hywerthon/gradle-cli:0.0.6-SNAPSHOT
+              sudo docker run -d --name gradle_cli_api -p 8210:8210 hywerthon/${projectName}:${version}
              """
         }
     }
