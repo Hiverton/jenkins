@@ -28,18 +28,6 @@ node('slave-01') {
             """
     }
 
-    stage('remove container docker') {
-
-        try {
-            sh """
-                sudo docker rm -f gradle_cli_api
-               """
-        } catch (exc) {
-          println "Não tem container rodando..."
-        }
-
-    }
-
     stage('build docker image') {
 
         sh """
@@ -59,7 +47,6 @@ node('slave-01') {
 
     }
 
-    //sudo docker tag hywerthon/${projectName}:${version} docker.io/hywerthon/gradle-cli
     stage('tag an image') {
 
         try {
@@ -102,6 +89,18 @@ node('slave-01') {
         } catch (exc) {
           println "Erro ao puxar image para registry..."
         }
+    }
+
+    stage('remove container docker') {
+
+        try {
+            sh """
+                sudo docker rm -f gradle_cli_api
+               """
+        } catch (exc) {
+          println "Não tem container rodando..."
+        }
+
     }
 
     stage('run image') {
