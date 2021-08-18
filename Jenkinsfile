@@ -101,7 +101,7 @@ node('slave-01') {
 }
 
 
-node('slave-02') {
+/*node('slave-02') {
 
     def myRepo = checkout scm
     def projectName = 'gradle-cli';
@@ -129,4 +129,4 @@ node('slave-02') {
           println "subindo image local..."
         }
     }
-}
+}*/
